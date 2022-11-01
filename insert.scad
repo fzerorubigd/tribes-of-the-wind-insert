@@ -39,7 +39,18 @@ gw3 = gw * 3;
 gw4 = gw * 4;
 g_lid_solid = f;
 
+function getLidAttributes(txt, rotation = 0, size = 12, solid=g_lid_solid) =  [
+    [ LID_SOLID_B, solid],
+/*    [ LABEL,
+        [
+            [ LBL_TEXT,    txt],
+            [ LBL_SIZE,     size ],
+            [ LBL_FONT, "Ubuntu:style=bold" ],
+            [ ROTATION, rotation],
+        ]],*/
+];
 lid_attr = [[ LID_SOLID_B, g_lid_solid]];
+
 g_cut = 3.5;
 
 box_width = 280;
@@ -87,8 +98,9 @@ data =
         [
             [ BOX_SIZE_XYZ, [tiles_width, tiles_height, tiles_depth] ],
             [ BOX_LID,
-                lid_attr,
+                getLidAttributes(txt="Tiles", rotation=90),
             ],
+
             [ BOX_COMPONENT,
                 [
                     [ CMP_COMPARTMENT_SIZE_XYZ, [ tiles_width-gw2, tile_r,tiles_depth - gw ] ],
@@ -109,7 +121,7 @@ data =
         [
             [ BOX_SIZE_XYZ, [cards_width, cards_height, action_cards_depth]],
             [ BOX_LID,
-                lid_attr,
+                getLidAttributes(txt="Action Cards",size=9, rotation=90),
             ],
             [ BOX_COMPONENT,
                 [
@@ -138,7 +150,7 @@ data =
         [
             [ BOX_SIZE_XYZ, [tokens_width, tokens_height, tokens_depth]],
             [ BOX_LID,
-                lid_attr,
+                getLidAttributes(txt="Tokens & Cards",size=9, rotation=90),
             ],
             [ BOX_COMPONENT,
                 [
@@ -165,7 +177,7 @@ data =
         [
             [ BOX_SIZE_XYZ, [wood_width, wood_height, small_wood_depth]],
             [ BOX_LID,
-                lid_attr,
+                getLidAttributes(txt="Temple & Riders",size=9, rotation=90),,
             ],
             [ BOX_COMPONENT,
                 [
@@ -179,7 +191,7 @@ data =
         [
             [ BOX_SIZE_XYZ, [wood_width, wood_height, large_wood_depth]],
             [ BOX_LID,
-                lid_attr,
+                getLidAttributes(txt="Villages",size=9, rotation=90),
             ],
             [ BOX_COMPONENT,
                 [
