@@ -7,7 +7,7 @@ g_b_print_lid = true;
 g_b_print_box = true; 
 
 // Focus on one box
-g_isolated_print_box = ""; 
+g_isolated_print_box = "optional_spacer"; 
 
 // Used to visualize how all of the boxes fit together. 
 g_b_visualization = f;          
@@ -38,24 +38,27 @@ gw2 = gw * 2;
 gw3 = gw * 3;
 gw4 = gw * 4;
 g_lid_solid = f;
+g_lid_label = f;
 
-function getLidAttributes(txt, rotation = 0, size = 12, solid=g_lid_solid) =  [
+
+function getLidAttributes(txt, rotation = 0, size = 12, solid=g_lid_solid) = (g_lid_label) ? [
     [ LID_SOLID_B, solid],
-/*    [ LABEL,
+    [ LABEL,
         [
             [ LBL_TEXT,    txt],
             [ LBL_SIZE,     size ],
             [ LBL_FONT, "Ubuntu:style=bold" ],
             [ ROTATION, rotation],
-        ]],*/
-];
+        ]
+     ],
+] : [[ LID_SOLID_B, solid]];
 lid_attr = [[ LID_SOLID_B, g_lid_solid]];
 
 g_cut = 3.5;
 
 box_width = 280;
 box_height = 280;
-box_depth = 40;
+box_depth = 42;
 
 // tiles 
 tiles_width = 80;
@@ -77,7 +80,8 @@ tokens_width = cards_width;
 tokens_height = cards_height;
 
 tokens_depth = box_depth - other_cards_depth;
-
+water_5 = 30;
+water_1 = cards_height - water_5 - gw2;
 // wooden pieces
 
 wood_width = tiles_width;
@@ -146,11 +150,11 @@ data =
             ],
         ]
     ],
-    [   "tokens_x2",
+    [   "pollution_x1",
         [
             [ BOX_SIZE_XYZ, [tokens_width, tokens_height, tokens_depth]],
             [ BOX_LID,
-                getLidAttributes(txt="Tokens & Cards",size=9, rotation=90),
+                getLidAttributes(txt="Pollutions & Cards",size=6.5, rotation=90),
             ],
             [ BOX_COMPONENT,
                 [
@@ -160,6 +164,27 @@ data =
             ],
         ]
     ],   
+       [   "water_x1",
+        [
+            [ BOX_SIZE_XYZ, [tokens_width, tokens_height, tokens_depth]],
+            [ BOX_LID,
+                getLidAttributes(txt="Water & Cards",size=7, rotation=90),
+            ],
+            [ BOX_COMPONENT,
+                [
+                    [ CMP_COMPARTMENT_SIZE_XYZ, [ tokens_width-gw2, water_5,tokens_depth - gw ] ],
+                    [POSITION_XY,               [0,0]],
+                ]
+            ],            
+            [ BOX_COMPONENT,
+                [
+                    [ CMP_COMPARTMENT_SIZE_XYZ, [ tokens_width-gw2, water_1-gw,tokens_depth - gw ] ],
+                    [POSITION_XY,               [0,water_5+gw]],
+                ]
+            ],
+            
+        ]
+    ], 
     [   "wooden_piece_bottom_small_x1",
         [
             [ BOX_SIZE_XYZ, [wood_width, wood_height, small_wood_depth]],
@@ -177,7 +202,7 @@ data =
         [
             [ BOX_SIZE_XYZ, [wood_width, wood_height, small_wood_depth]],
             [ BOX_LID,
-                getLidAttributes(txt="Temple & Riders",size=9, rotation=90),,
+                getLidAttributes(txt="Temple & Riders",size=8, rotation=90),,
             ],
             [ BOX_COMPONENT,
                 [
