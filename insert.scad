@@ -42,7 +42,6 @@ g_lid_label = f;
 
 
 function getLidAttributes(txt, rotation = 0, size = 12, solid=g_lid_solid) = (g_lid_label) ? [
-    [ LID_SOLID_B, solid],
     [ LABEL,
         [
             [ LBL_TEXT,    txt],
@@ -202,7 +201,7 @@ data =
         [
             [ BOX_SIZE_XYZ, [wood_width, wood_height, small_wood_depth]],
             [ BOX_LID,
-                getLidAttributes(txt="Temple & Riders",size=8, rotation=90),,
+                getLidAttributes(txt="Temple & Riders",size=6.5, rotation=90),,
             ],
             [ BOX_COMPONENT,
                 [
@@ -216,7 +215,7 @@ data =
         [
             [ BOX_SIZE_XYZ, [wood_width, wood_height, large_wood_depth]],
             [ BOX_LID,
-                getLidAttributes(txt="Villages",size=9, rotation=90),
+                getLidAttributes(txt="Villages",size=8, rotation=90),
             ],
             [ BOX_COMPONENT,
                 [
@@ -232,9 +231,10 @@ data =
             [ BOX_NO_LID_B, true],  
             [ BOX_COMPONENT,
                 [
-                    [CMP_COMPARTMENT_SIZE_XYZ,  [ spacer_width-gw2, spacer_height-gw2, spacer_depth -gw ],],
+                    [CMP_COMPARTMENT_SIZE_XYZ,  [ spacer_width-gw2, spacer_height-gw2, spacer_depth *5 ],],
                     [POSITION_XY,                           [0,0]],
                     [ CMP_CUTOUT_BOTTOM_B, true ],
+                    [ CMP_CUTOUT_DEPTH_PCT, 90 ]
                 ]
             ]]]
 ];
